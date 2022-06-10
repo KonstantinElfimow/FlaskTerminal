@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+        <title>{{ title }} - Welcome to Flask Terminal!</title>
+    {% else %}
+        <title>Flask Terminal</title>
+    {% endif %}
+</head>
+<body>
+    {% if title %}
+        <h1>Hello, {{ user.username }}</h1>
+    {% endif %}
+    <form>
+        <input name="command" type="text">
+    </form>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    {% if data %}
+        {% for line in data %}
+            <p>{{ line }}</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
