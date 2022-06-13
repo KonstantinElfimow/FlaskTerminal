@@ -16,17 +16,13 @@ def index():
     if request.method == 'GET':
         query = request.args.get('command')
         if query and query != '':
-            #if query.strip() == 'kill':
-            #    return render_template('index.html', title='Home', user=user)
-
             parsed_query = list(filter(lambda x: x != ' ', query.split()))
             print(parsed_query)
             try:
                 process = subprocess.Popen(query, cwd=os.getcwd(), stdout=subprocess.PIPE, text=True)
                 data = process.stdout.read().splitlines()
-                #print(data)
-            except subprocess.CalledProcessError as e:
-                error = f"Ошибка команды {e.cmd}!"
+            except Exception as e:
+                error = f"Ошибка команды {e}!"
             return render_template('index.html', error=error, data=data)
     return render_template('index.html', title='Home', user=user)
 
